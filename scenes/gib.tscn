@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/letterfont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://scripts/gib.gd" type="Script" id=2]
+
+[sub_resource type="PhysicsMaterial" id=1]
+resource_local_to_scene = true
+bounce = 0.25
+
+[sub_resource type="CapsuleShape2D" id=2]
+resource_local_to_scene = true
+height = 1.07935
+
+[node name="RigidBody2D" type="RigidBody2D"]
+collision_layer = 16
+collision_mask = 30
+physics_material_override = SubResource( 1 )
+gravity_scale = 2.0
+contact_monitor = true
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
+
+[node name="Label" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 10.0
+anchor_bottom = 0.5
+margin_left = -7.0
+margin_top = -16.0
+margin_right = 7.0
+margin_bottom = 17.0
+rect_pivot_offset = Vector2( 7, 15.5 )
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="body_entered" from="." to="." method="_on_RigidBody2D_body_entered"]
